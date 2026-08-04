@@ -5,7 +5,8 @@ from aiogram.filters import Command
 from aiohttp import web
 import asyncio
 
-TOKEN = os.getenv("BOT_TOKEN", "BURAYA_BOT_TOKEN_YAZ")
+# Tokenini buradaki tırnak içine yazabilirsin
+TOKEN = "7953258525:AAH40B04f4g_6bK_X2v031M_z0yX_2v1_1a" # Kendi tokenini buraya ekle
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
