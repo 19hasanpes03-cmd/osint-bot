@@ -5,13 +5,11 @@ from aiogram.filters import Command
 from aiohttp import web
 import asyncio
 
-# Token bilgilerini buraya veya Render Environment Variables kısmına ekleyebilirsin
 TOKEN = os.getenv("BOT_TOKEN", "BURAYA_BOT_TOKEN_YAZ")
 
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
-# --- Web Server (UptimeRobot'un 7/24 ayakta tutması için) ---
 async def handle(request):
     return web.Response(text="OSINT Bot is alive!")
 
@@ -24,7 +22,6 @@ async def start_web_server():
     site = web.TCPSite(runner, "0.0.0.0", port)
     await site.start()
 
-# --- Bot Komutları ---
 @dp.message(Command("start"))
 async def cmd_start(message: types.Message):
     await message.answer(
@@ -129,13 +126,9 @@ async def cmd_phone(message: types.Message):
         parse_mode="Markdown"
     )
 
-# --- Ana Çalıştırma Fonksiyonu ---
 async def main():
-    # Web sunucusunu arka planda başlat (UptimeRobot için)
     asyncio.create_task(start_web_server())
-    # Botu başlat
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
     asyncio.run(main())
-    
